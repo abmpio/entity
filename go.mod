@@ -8,9 +8,9 @@ require (
 	github.com/abmpio/app v0.0.0-20231107113850-3cb7968b906e
 	github.com/abmpio/configurationx v0.0.0-20230713072959-39c660b4f462
 	github.com/abmpio/libx v0.0.0-20231024112445-2ba78ad12aa0
-	github.com/abmpio/mongodbr v0.0.0-20230713130758-03f7f55fbe15
+	github.com/abmpio/mongodbr v0.0.0-20240327142532-27efeadecef3
 	github.com/satori/go.uuid v1.2.0
-	go.mongodb.org/mongo-driver v1.12.1
+	go.mongodb.org/mongo-driver v1.14.0
 )
 
 require (
@@ -20,7 +20,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/kataras/golog v0.1.9 // indirect
 	github.com/kataras/pio v0.0.12 // indirect
-	github.com/klauspost/compress v1.16.7 // indirect
+	github.com/klauspost/compress v1.17.7 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
 	github.com/lestrrat-go/strftime v1.0.6 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
@@ -40,11 +40,11 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.25.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
+	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
-	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
-	golang.org/x/text v0.12.0 // indirect
+	golang.org/x/sync v0.6.0 // indirect
+	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

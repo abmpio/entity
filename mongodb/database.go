@@ -25,7 +25,7 @@ func NewDatabase(databaseName string) *Database {
 	d := &Database{
 		DatabaseName: databaseName,
 	}
-	d._db = mongodbr.DefaultClient.Database(databaseName)
+	d._db = mongodbr.DefaultClient().Database(databaseName)
 	d._entityRepositoryOptionMap = make(map[string][]mongodbr.RepositoryOption)
 	d._repositoryMapping = make(map[string]mongodbr.IRepository)
 
