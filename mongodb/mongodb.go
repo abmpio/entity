@@ -41,7 +41,7 @@ func initMongodb() {
 		}
 
 		if eachKey == mongodb.AliasName_Default {
-			if mongodbr.DefaultClient == nil {
+			if mongodbr.DefaultClient() == nil {
 				client, err = mongodbr.SetupDefaultClient(eachOption.Uri, opts...)
 				if err != nil {
 					log.Logger.Error(err.Error())
