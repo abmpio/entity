@@ -1,9 +1,9 @@
 package mongodb
 
 import (
-	"github.com/abmpio/app/web"
+	"github.com/abmpio/app/cli"
 )
 
 func init() {
-	web.ConfigureService(initMongodbConfigurator)
+	cli.ConfigureService(initMongodbConfigurator)
 }
