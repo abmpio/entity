@@ -13,6 +13,7 @@ type IEntityService[T mongodbr.IEntity] interface {
 
 	FindAll() ([]*T, error)
 	FindList(filter interface{}, opts ...mongodbr.FindOption) (list []*T, err error)
+	FindListByIdList(idList []primitive.ObjectID, opts ...mongodbr.FindOption) (list []*T, err error)
 	Count(filter interface{}) (count int64, err error)
 	FindById(id primitive.ObjectID) (*T, error)
 	FindOne(filter interface{}) (*T, error)
@@ -51,6 +52,10 @@ func (s *EntityService[T]) FindAll() (list []*T, err error) {
 
 func (s *EntityService[T]) FindList(filter interface{}, opts ...mongodbr.FindOption) (list []*T, err error) {
 	return mongodbr.FindTByFilter[T](s.repository, filter, opts...)
+}
+
+func (s *EntityService[T]) FindListByIdList(idList []primitive.ObjectID, opts ...mongodbr.FindOption) (list []*T, err error) {
+	return mongodbr.FindTListByObjectIdList[T](s.repository, idList)
 }
 
 func (s *EntityService[T]) Count(filter interface{}) (count int64, err error) {
