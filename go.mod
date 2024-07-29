@@ -10,7 +10,7 @@ require (
 	github.com/abmpio/app v0.0.0-20240520130037-6192508e1d2a
 	github.com/abmpio/configurationx v0.0.0-20240520083200-bcc6a8bb57fa
 	github.com/abmpio/libx v0.0.0-20240422123003-5986afc11094
-	github.com/abmpio/mongodbr v0.0.0-20240729131513-a74b026f20f3
+	github.com/abmpio/mongodbr v0.0.0-20240729171210-e14da323bcd5
 	github.com/satori/go.uuid v1.2.0
 	go.mongodb.org/mongo-driver v1.16.0
 )
