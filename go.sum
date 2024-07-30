@@ -9,10 +9,8 @@ github.com/abmpio/configurationx v0.0.0-20240520083200-bcc6a8bb57fa h1:a+PVM0zKo
 github.com/abmpio/configurationx v0.0.0-20240520083200-bcc6a8bb57fa/go.mod h1:+dKpgI9DK0dmz83PFE2sKDIbflkKS8o8dQkgnCX3orU=
 github.com/abmpio/libx v0.0.0-20240422123003-5986afc11094 h1:1bTdEI/7EesLel8/zM7qvWSov00fpBo44AqLPkH6kGo=
 github.com/abmpio/libx v0.0.0-20240422123003-5986afc11094/go.mod h1:1FdlmnwDWa2mTehDyH2JgEozqZv2uTys6LM+PmYRCZg=
-github.com/abmpio/mongodbr v0.0.0-20240729131513-a74b026f20f3 h1:ArLFtlNfoy6ccINamX0z17KdtT81c3TIbGdvbgIlGHg=
-github.com/abmpio/mongodbr v0.0.0-20240729131513-a74b026f20f3/go.mod h1:BBOoqVKwv+xv3NG/IuZUPMOHuGKf3TkT0yMcbFvBfQI=
-github.com/abmpio/mongodbr v0.0.0-20240729171210-e14da323bcd5 h1:9TE7591blpkLT6itZna2AsVEs23c57Q0eQt6pwe+Ic0=
-github.com/abmpio/mongodbr v0.0.0-20240729171210-e14da323bcd5/go.mod h1:BBOoqVKwv+xv3NG/IuZUPMOHuGKf3TkT0yMcbFvBfQI=
+github.com/abmpio/mongodbr v0.0.0-20240730070346-68e2d1c17880 h1:Us+j1mddWYMuET4DMIAVRqIMOTSewprjjICtwJn9khY=
+github.com/abmpio/mongodbr v0.0.0-20240730070346-68e2d1c17880/go.mod h1:BBOoqVKwv+xv3NG/IuZUPMOHuGKf3TkT0yMcbFvBfQI=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
