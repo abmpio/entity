@@ -8,14 +8,32 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var (
+	// key为实体对象的fullname,value为collection name
+	_registedEntityCollection map[string]string = make(map[string]string)
+)
+
+func RegistCollectionNameByType(v interface{}, collectionName string) {
+	_registedEntityCollection[reflector.GetFullName(v)] = collectionName
+}
+
+func RegistEntityCollectionName[T mongodbr.IEntity](collectionName string) {
+	RegistCollectionNameByType(new(T), collectionName)
+}
+
 func GetCollectionName(v interface{}) string {
-	return str.ToSnake(reflector.GetName(v))
+	key := reflector.GetFullName(v)
+	collectionName, ok := _registedEntityCollection[key]
+	if !ok {
+		return str.ToSnake(reflector.GetName(v))
+	}
+	return collectionName
 }
 
 // regist Repository create option
 func RegistEntityRepositoryOption[T mongodbr.IEntity](clientKey string, databaseName string, opts ...mongodbr.RepositoryOption) {
 	d := GetDatabase(clientKey, databaseName)
-	collectionName := GetCollectionName((new(T)))
+	collectionName := GetCollectionName(new(T))
 	d._entityRepositoryOptionMap[collectionName] = createEntityRepositoryOption[T](opts...)
 	d._repositoryMapping[collectionName] = d.ensureCreateRepository(collectionName, opts...)
 }
