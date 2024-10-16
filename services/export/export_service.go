@@ -1,4 +1,4 @@
-package entity
+package export
 
 import (
 	"context"
@@ -269,7 +269,7 @@ func (s *EntityExportService[T]) mapColumns(export *EntityExport) (columns []tup
 	if len(export.FieldNameList) > 0 {
 		for _, eachColumn := range export.FieldNameList {
 			columnTitle := eachColumn
-			if export.FieldNameTitleMap != nil && len(export.FieldNameTitleMap) > 0 {
+			if len(export.FieldNameTitleMap) > 0 {
 				columnTitleMap, ok := export.FieldNameTitleMap[eachColumn]
 				if ok && len(columnTitle) > 0 {
 					columnTitle = columnTitleMap
@@ -313,34 +313,34 @@ func (s *EntityExportService[T]) getRowCells(columns []string, entityItem *T, op
 			cellValue := options.GetFieldNameFunc(entityItem, c)
 			cells = append(cells, cellValue)
 		} else {
-			v, ok := data[c]
+			cValue, ok := data[c]
 			if !ok {
 				cells = append(cells, "")
 				continue
 			}
-			switch v.(type) {
+			switch vValue := cValue.(type) {
 			case string:
-				cells = append(cells, v.(string))
+				cells = append(cells, vValue)
 			case time.Time:
-				cells = append(cells, v.(time.Time).Format("2006-01-02 15:04:05"))
+				cells = append(cells, vValue.Format("2006-01-02 15:04:05"))
 			case int:
-				cells = append(cells, strconv.Itoa(v.(int)))
+				cells = append(cells, strconv.Itoa(vValue))
 			case int32:
-				cells = append(cells, strconv.Itoa(int(v.(int32))))
+				cells = append(cells, strconv.Itoa(int(vValue)))
 			case int64:
-				cells = append(cells, strconv.FormatInt(v.(int64), 10))
+				cells = append(cells, strconv.FormatInt(vValue, 10))
 			case float32:
-				cells = append(cells, strconv.FormatFloat(float64(v.(float32)), 'f', -1, 32))
+				cells = append(cells, strconv.FormatFloat(float64(vValue), 'f', -1, 32))
 			case float64:
-				cells = append(cells, strconv.FormatFloat(v.(float64), 'f', -1, 64))
+				cells = append(cells, strconv.FormatFloat(vValue, 'f', -1, 64))
 			case bool:
-				cells = append(cells, strconv.FormatBool(v.(bool)))
+				cells = append(cells, strconv.FormatBool(vValue))
 			case primitive.ObjectID:
-				cells = append(cells, v.(primitive.ObjectID).Hex())
+				cells = append(cells, vValue.Hex())
 			case primitive.DateTime:
-				cells = append(cells, v.(primitive.DateTime).Time().Format("2006-01-02 15:04:05"))
+				cells = append(cells, vValue.Time().Format("2006-01-02 15:04:05"))
 			default:
-				cells = append(cells, fmt.Sprintf("%v", v))
+				cells = append(cells, fmt.Sprintf("%v", vValue))
 			}
 		}
 	}

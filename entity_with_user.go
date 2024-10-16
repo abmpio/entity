@@ -1,25 +1,23 @@
 package entity
 
-import "github.com/abmpio/mongodbr"
-
 type IEntityWithUser interface {
 	SetUserCreator(userId string)
 	GetCreatorId() string
 }
 
-type EntityWithUser struct {
-	mongodbr.AuditedEntity `bson:",inline"`
-}
+// type EntityWithUser struct {
+// 	mongodbr.AuditedEntity `bson:",inline"`
+// }
 
-// #region IEntityWithUser Members
+// // #region IEntityWithUser Members
 
-func (p *EntityWithUser) SetUserCreator(userId string) {
-	p.CreatorId = userId
-}
+// func (p *EntityWithUser) SetUserCreator(userId string) {
+// 	p.CreatorId = userId
+// }
 
-func (p *EntityWithUser) GetCreatorId() string {
-	return p.CreatorId
-}
+// func (p *EntityWithUser) GetCreatorId() string {
+// 	return p.CreatorId
+// }
 
 // #endregion
 
