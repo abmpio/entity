@@ -2,8 +2,6 @@ module github.com/abmpio/entity
 
 go 1.22.0
 
-toolchain go1.22.8
-
 require (
 	github.com/ReneKroon/ttlcache v1.7.0
 	github.com/abmpio/abmp v0.0.0-20240708094807-9bfd8036f0dc
