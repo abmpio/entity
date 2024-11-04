@@ -23,3 +23,11 @@ func FromCurrentTenant(ctx context.Context) (TenantInfo, bool) {
 	}
 	return NewBasicTenantInfo("", ""), false
 }
+
+func TenantIdFromContext(ctx context.Context) string {
+	tenantInfo, ok := FromCurrentTenant(ctx)
+	if !ok {
+		return ""
+	}
+	return tenantInfo.GetId()
+}
