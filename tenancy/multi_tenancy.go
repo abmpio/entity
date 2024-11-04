@@ -1,4 +1,4 @@
-package entity
+package tenancy
 
 type IMultiTenancy interface {
 	SetTenantId(tenantId string)

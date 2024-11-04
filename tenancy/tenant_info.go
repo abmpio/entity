@@ -1,4 +1,4 @@
-package entity
+package tenancy
 
 type TenantInfo interface {
 	GetId() string
