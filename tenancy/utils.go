@@ -5,8 +5,8 @@ import (
 )
 
 func GetMultiTenantSide(ctx context.Context) MultiTenancySide {
-	tenantInfo, _ := FromCurrentTenant(ctx)
-	if tenantInfo.GetId() == "" {
+	tenantId, _ := TenantIdFromContext(ctx)
+	if tenantId == "" {
 		return Host
 	} else {
 		return Tenant
@@ -14,6 +14,14 @@ func GetMultiTenantSide(ctx context.Context) MultiTenancySide {
 }
 
 const DefaultKey = "__tenant"
+
+var (
+	_tenantIdKey string = DefaultKey
+)
+
+func SetTenantIdKey(v string) {
+	_tenantIdKey = v
+}
 
 func KeyOrDefault(key string) string {
 	if len(key) > 0 {
