@@ -13,7 +13,7 @@ func GetMultiTenantSide(ctx context.Context) MultiTenancySide {
 	}
 }
 
-const DefaultKey = "__tenant"
+const DefaultKey = "tenant"
 
 var (
 	_tenantIdKey string = DefaultKey
