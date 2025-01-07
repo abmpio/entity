@@ -125,8 +125,12 @@ func (s *EntityExportService[T]) export(export *EntityExport) {
 	//csv writer
 	csvWriter, csvFile, err := s.getCsvWriter(export)
 	defer func() {
-		csvWriter.Flush()
-		_ = csvFile.Close()
+		if csvWriter != nil {
+			csvWriter.Flush()
+		}
+		if csvFile != nil {
+			_ = csvFile.Close()
+		}
 	}()
 	if err != nil {
 		export.Status = ExportStatus_Error
