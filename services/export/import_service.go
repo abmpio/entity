@@ -28,6 +28,8 @@ type ImportOptions struct {
 	// key为导入数据源的columnName,如csv中第一行的column
 	// value为目标对象的字段名
 	FieldNameTitleMap map[string]string `json:"fieldNameTitleMap"`
+	// 用来将原始的行转换到对象的属性中
+	TransformRecordFunc func(src map[string]string, dest map[string]interface{}) error
 }
 
 func (o *ImportOptions) SafeFieldNameMap(fieldName string) string {
@@ -162,7 +164,7 @@ func (s *EntityImportService[T]) extractEntityFromCSV(entityImport *EntityImport
 	if err != nil {
 		return nil, err
 	}
-	columns, rows, err := csvReader.ReadData()
+	rows, err := csvReader.ReadData()
 	if err != nil {
 		err = fmt.Errorf("在读取csv文件的数据时出现异常,文件:%s,异常信息:%s", csvReader.Path, err.Error())
 		return nil, err
@@ -172,17 +174,26 @@ func (s *EntityImportService[T]) extractEntityFromCSV(entityImport *EntityImport
 		return nil, err
 	}
 	var entityList []*T
-	for i := range rows {
+	for i, row := range rows {
 		newEntityMap := make(map[string]interface{})
-		for j, cName := range columns {
-			cMapName := entityImport.ImportOptions.SafeFieldNameMap(cName)
-			if len(cMapName) > 0 {
-				cName = cMapName
+		if entityImport.ImportOptions.TransformRecordFunc != nil {
+			// used transform func
+			err := entityImport.ImportOptions.TransformRecordFunc(row, newEntityMap)
+			if err != nil {
+				return nil, fmt.Errorf("导入的数据中包含了无效的数据,行:%d,err:%s", i+1, err.Error())
 			}
-			if len(cName) <= 0 {
-				continue
+		} else {
+			for eachKey, eachValue := range row {
+				cName := eachKey
+				cMapName := entityImport.ImportOptions.SafeFieldNameMap(eachKey)
+				if len(cMapName) > 0 {
+					cName = cMapName
+				}
+				if len(cName) <= 0 {
+					continue
+				}
+				newEntityMap[cName] = eachValue
 			}
-			newEntityMap[cName] = rows[i][j]
 		}
 		if len(newEntityMap) <= 0 {
 			log.Logger.Warn(fmt.Sprintf("导入的数据中包含了空行,将忽略此行的数据,行:%d", i+1))

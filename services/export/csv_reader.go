@@ -5,7 +5,6 @@ import (
 	"errors"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 type csvReader struct {
@@ -22,56 +21,44 @@ func newCSVReader(path string) (*csvReader, error) {
 	}, nil
 }
 
-func (h *csvReader) ReadData() (columns []string, rows [][]string, err error) {
-	openCast, err := os.Open(h.Path)
+func (h *csvReader) ReadData() ([]map[string]string, error) {
+	list := make([]map[string]string, 0)
+	csvFile, err := os.Open(h.Path)
 	if err != nil {
 		log.Fatalln("无法打开csv文件,文件路径:", h.Path)
-		return
+		return list, err
 	}
 
-	defer openCast.Close()
+	defer csvFile.Close()
 	//创建csv读取实例
-	csvReader := csv.NewReader(openCast)
+	csvReader := csv.NewReader(csvFile)
 
 	//获取一行内容，第一行为header
-	columns, err = csvReader.Read()
+	columns, err := csvReader.Read()
 	if err != nil {
-		return nil, nil, err
+		return list, err
 	}
 
-	rows, err = csvReader.ReadAll()
+	if len(columns) <= 0 {
+		return list, nil
+	}
+	rows, err := csvReader.ReadAll()
 	if err != nil {
-		return columns, nil, err
+		return list, err
 	}
-	return
-}
-
-func directoryIsExist(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
+	if len(rows) <= 0 {
+		return list, nil
 	}
-
-	if os.IsNotExist(err) {
-		return false, nil
+	for i := range rows {
+		currentRecord := make(map[string]string)
+		for j, cName := range columns {
+			if len(rows[i][j]) > 0 {
+				currentRecord[cName] = rows[i][j]
+			}
+		}
+		if len(currentRecord) > 0 {
+			list = append(list, currentRecord)
+		}
 	}
-
-	return false, err
-}
-
-// 确保目录已经存在，如果不存在，则创建
-func ensureDirectoryExist(path string) error {
-	currentDirectory := filepath.Dir(path)
-	exist, err := directoryIsExist(currentDirectory)
-	if err != nil {
-		return err
-	}
-	if !exist {
-		//不存在，则创建
-		err = os.MkdirAll(currentDirectory, os.ModePerm)
-	}
-	if err != nil {
-		return err
-	}
-	return nil
+	return list, nil
 }
