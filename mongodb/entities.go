@@ -1,6 +1,8 @@
 package mongodb
 
 import (
+	"fmt"
+
 	"github.com/abmpio/libx/reflector"
 	"github.com/abmpio/libx/str"
 	"github.com/abmpio/mongodbr"
@@ -34,6 +36,18 @@ func GetCollectionName(v interface{}) string {
 func RegistEntityRepositoryOption[T mongodbr.IEntity](clientKey string, databaseName string, opts ...mongodbr.RepositoryOption) {
 	d := GetDatabase(clientKey, databaseName)
 	collectionName := GetCollectionName(new(T))
+	d._entityRepositoryOptionMap[collectionName] = createEntityRepositoryOption[T](opts...)
+	d._repositoryMapping[collectionName] = d.ensureCreateRepository(collectionName, opts...)
+}
+
+// regist Repository create option with collection name prefiex
+func RegistEntityRepositoryOptionWithPrefix[T mongodbr.IEntity](clientKey string, databaseName string, collectionPrefix string, opts ...mongodbr.RepositoryOption) {
+	d := GetDatabase(clientKey, databaseName)
+	collectionName := GetCollectionName(new(T))
+	if len(collectionPrefix) > 0 {
+		collectionName = fmt.Sprintf("%s%s", collectionPrefix, collectionName)
+		RegistEntityCollectionName[T](collectionName)
+	}
 	d._entityRepositoryOptionMap[collectionName] = createEntityRepositoryOption[T](opts...)
 	d._repositoryMapping[collectionName] = d.ensureCreateRepository(collectionName, opts...)
 }
