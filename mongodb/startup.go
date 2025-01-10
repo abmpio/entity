@@ -1,12 +1,13 @@
 package mongodb
 
 import (
-	"github.com/abmpio/abmp/pkg/log"
+	"fmt"
+
 	"github.com/abmpio/app/cli"
 )
 
 func init() {
-	log.Logger.Info("entity.mongodb starter init")
+	fmt.Println("entity.mongodb starter init")
 
 	cli.ConfigureService(initMongodbConfigurator)
 }
