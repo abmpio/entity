@@ -8,7 +8,7 @@ require (
 	github.com/abmpio/app v0.0.0-20240708095820-59076d71a526
 	github.com/abmpio/configurationx v0.0.0-20240520083200-bcc6a8bb57fa
 	github.com/abmpio/libx v0.0.0-20241002083624-e3d5751cb744
-	github.com/abmpio/mongodbr v0.0.0-20250110132302-d280479ffedf
+	github.com/abmpio/mongodbr v0.0.0-20250120143730-dfa4961c2958
 	github.com/satori/go.uuid v1.2.0
 	go.mongodb.org/mongo-driver v1.17.2
 )

@@ -49,7 +49,7 @@ func initMongodb() {
 				}
 			}
 		} else {
-			client, err = mongodbr.RegistClient(eachKey, eachOption.Uri, func(co *options.ClientOptions) {})
+			client, err = mongodbr.RegistClient(eachKey, eachOption.Uri, opts...)
 			if err != nil {
 				log.Logger.Error(err.Error())
 				panic(err)
