@@ -135,7 +135,7 @@ func (s *EntityImportService[T]) GetImport(importId string) (*EntityImport, erro
 func (s *EntityImportService[T]) importFromCsv(entityImport *EntityImport) error {
 	list, err := s.extractEntityFromCSV(entityImport)
 	if err != nil {
-		return nil
+		return err
 	}
 	if len(list) <= 0 {
 		log.Logger.Info(fmt.Sprintf("导入的文件中没有包含任何要导入的数据,filePath:%s",
