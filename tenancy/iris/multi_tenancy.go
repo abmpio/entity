@@ -48,7 +48,7 @@ func WithResolveOption(opt ...tenancy.ResolveOption) Option {
 	}
 }
 
-func MultiTenancy(ts tenancy.ITenantStore, options ...Option) iris.Handler {
+func MultiTenancy(tsFn func() tenancy.ITenantStore, options ...Option) iris.Handler {
 	opt := &option{
 		hmtOpt:  http.NewDefaultWebMultiTenancyOption(),
 		ef:      DefaultErrorFormatter,
@@ -72,7 +72,7 @@ func MultiTenancy(ts tenancy.ITenantStore, options ...Option) iris.Handler {
 		trOpt = append(trOpt, opt.resolve...)
 
 		// get tenant config
-		tenantConfigProvider := tenancy.NewDefaultTenantConfigProvider(tenancy.NewDefaultTenantResolver(trOpt...), ts)
+		tenantConfigProvider := tenancy.NewDefaultTenantConfigProvider(tenancy.NewDefaultTenantResolver(trOpt...), tsFn())
 		tenantConfig, err := tenantConfigProvider.Get(context)
 		if err != nil {
 			opt.ef(context, err)
