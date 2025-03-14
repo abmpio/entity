@@ -11,12 +11,12 @@ import (
 type IEntityService[T mongodbr.IEntity] interface {
 	GetRepository() mongodbr.IRepository
 
-	FindAll() ([]*T, error)
+	FindAll(opts ...mongodbr.FindOption) ([]*T, error)
 	FindList(filter interface{}, opts ...mongodbr.FindOption) (list []*T, err error)
 	FindListByIdList(idList []primitive.ObjectID, opts ...mongodbr.FindOption) (list []*T, err error)
 	Count(filter interface{}) (count int64, err error)
-	FindById(id primitive.ObjectID) (*T, error)
-	FindOne(filter interface{}) (*T, error)
+	FindById(id primitive.ObjectID, opts ...mongodbr.FindOneOption) (*T, error)
+	FindOne(filter interface{}, opts ...mongodbr.FindOneOption) (*T, error)
 
 	Create(interface{}) (*T, error)
 	Delete(primitive.ObjectID) error
@@ -41,8 +41,8 @@ func (s *EntityService[T]) GetRepository() mongodbr.IRepository {
 	return s.repository
 }
 
-func (s *EntityService[T]) FindAll() (list []*T, err error) {
-	res := s.repository.FindAll()
+func (s *EntityService[T]) FindAll(opts ...mongodbr.FindOption) (list []*T, err error) {
+	res := s.repository.FindAll(opts...)
 	err = res.All(&list)
 	if err != nil {
 		return nil, err
@@ -62,12 +62,12 @@ func (s *EntityService[T]) Count(filter interface{}) (count int64, err error) {
 	return s.repository.CountByFilter(filter)
 }
 
-func (s *EntityService[T]) FindById(id primitive.ObjectID) (*T, error) {
-	return mongodbr.FindTByObjectId[T](s.repository, id)
+func (s *EntityService[T]) FindById(id primitive.ObjectID, opts ...mongodbr.FindOneOption) (*T, error) {
+	return mongodbr.FindTByObjectId[T](s.repository, id, opts...)
 }
 
-func (s *EntityService[T]) FindOne(filter interface{}) (*T, error) {
-	return mongodbr.FindOneTByFilter[T](s.repository, filter)
+func (s *EntityService[T]) FindOne(filter interface{}, opts ...mongodbr.FindOneOption) (*T, error) {
+	return mongodbr.FindOneTByFilter[T](s.repository, filter, opts...)
 }
 
 func (s *EntityService[T]) Create(item interface{}) (*T, error) {
