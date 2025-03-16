@@ -7,11 +7,11 @@ toolchain go1.23.5
 require (
 	github.com/ReneKroon/ttlcache v1.7.0
 	github.com/abmpio/abmp v0.0.0-20240708094807-9bfd8036f0dc
-	github.com/abmpio/app v0.0.0-20240708095820-59076d71a526
-	github.com/abmpio/configurationx v0.0.0-20250216081808-73873a89d3f9
-	github.com/abmpio/libx v0.0.0-20241029040836-37d1161ba509
-	github.com/abmpio/mongodbr v0.0.0-20250314082657-b2a14ac4a8f2
-	github.com/abmpio/webserver v0.0.0-20250110142900-e3015d020ec0
+	github.com/abmpio/app v0.0.0-20250316102917-c6228484a2a5
+	github.com/abmpio/configurationx v0.0.0-20250316102208-bb34a5de7a88
+	github.com/abmpio/libx v0.0.0-20250122091832-703dd45ef186
+	github.com/abmpio/mongodbr v0.0.0-20250316104744-4897aa7fc7aa
+	github.com/abmpio/webserver v0.0.0-20250316095628-f1dd590ed3be
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/satori/go.uuid v1.2.0
 	go.mongodb.org/mongo-driver v1.17.3
@@ -31,6 +31,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/flosch/pongo2/v4 v4.0.2 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
+	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20240730141124-034f12af3bf6 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -43,7 +44,6 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
-	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/serf v0.10.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/iris-contrib/schema v0.0.6 // indirect
@@ -56,7 +56,6 @@ require (
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
 	github.com/lestrrat-go/strftime v1.1.0 // indirect
-	github.com/magiconair/properties v1.8.9 // indirect
 	github.com/mailgun/raymond/v2 v2.0.48 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -68,17 +67,16 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/sagikazarmark/locafero v0.7.0 // indirect
-	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
+	github.com/sagikazarmark/locafero v0.8.0 // indirect
 	github.com/schollz/closestmatch v2.1.0+incompatible // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
-	github.com/spf13/afero v1.12.0 // indirect
+	github.com/spf13/afero v1.14.0 // indirect
 	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
-	github.com/spf13/viper v1.19.0 // indirect
+	github.com/spf13/viper v1.20.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/tdewolff/minify/v2 v2.20.37 // indirect
 	github.com/tdewolff/parse/v2 v2.7.15 // indirect
