@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/abmpio/abmp/pkg/log"
-	"github.com/abmpio/app"
 	"github.com/abmpio/app/cli"
 	"github.com/abmpio/configurationx"
 	"github.com/abmpio/configurationx/options/mongodb"
@@ -16,9 +15,6 @@ import (
 )
 
 func initMongodbConfigurator(cliApp cli.CliApplication) {
-	if app.HostApplication.SystemConfig().App.IsRunInCli {
-		return
-	}
 	initMongodb()
 }
 
