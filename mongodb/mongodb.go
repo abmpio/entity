@@ -59,6 +59,7 @@ func initMongodb() {
 		for {
 			err = mongodbr.Ping(client)
 			if err == nil {
+				log.Logger.Info(fmt.Sprintf("mongodb ping正常,key:%s", eachKey))
 				break
 			}
 			log.Logger.Warn(fmt.Sprintf("key:%s,err:%s",
