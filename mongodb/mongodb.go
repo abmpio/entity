@@ -40,14 +40,18 @@ func initMongodb() {
 			if mongodbr.DefaultClient() == nil {
 				client, err = mongodbr.SetupDefaultClient(eachOption.Uri, opts...)
 				if err != nil {
-					log.Logger.Error(err.Error())
+					log.Logger.Error(fmt.Sprintf("key:%s,err:%s",
+						eachKey,
+						err.Error()))
 					panic(err)
 				}
 			}
 		} else {
 			client, err = mongodbr.RegistClient(eachKey, eachOption.Uri, opts...)
 			if err != nil {
-				log.Logger.Error(err.Error())
+				log.Logger.Error(fmt.Sprintf("key:%s,err:%s",
+					eachKey,
+					err.Error()))
 				panic(err)
 			}
 		}
@@ -57,7 +61,9 @@ func initMongodb() {
 			if err == nil {
 				break
 			}
-			log.Logger.Warn(err.Error())
+			log.Logger.Warn(fmt.Sprintf("key:%s,err:%s",
+				eachKey,
+				err.Error()))
 			log.Logger.Warn("2s后重新测试...")
 			time.Sleep(2 * time.Second)
 		}
