@@ -1,8 +1,11 @@
 package entity
 
 const (
-	ASCENDING  = "asc"
-	DESCENDING = "desc"
+	ASCENDING  = "ascending"
+	DESCENDING = "descending"
+
+	ASC  = "asc"
+	DESC = "desc"
 )
 
 type Sort struct {

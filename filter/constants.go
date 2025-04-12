@@ -30,8 +30,3 @@ const (
 const (
 	SortQueryField = "sort"
 )
-
-const (
-	ASCENDING  = "asc"
-	DESCENDING = "dsc"
-)

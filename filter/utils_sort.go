@@ -44,9 +44,11 @@ func SortsToOption(sorts []entity.Sort) (sort bson.D, err error) {
 	sort = bson.D{}
 	for _, s := range sorts {
 		switch s.Direction {
-		case ASCENDING:
+		case entity.ASCENDING:
+		case entity.ASC:
 			sort = append(sort, bson.E{Key: s.Key, Value: 1})
-		case DESCENDING:
+		case entity.DESCENDING:
+		case entity.DESC:
 			sort = append(sort, bson.E{Key: s.Key, Value: -1})
 		}
 	}
