@@ -82,7 +82,9 @@ func (s *EntityService[T]) Create(item interface{}, opts ...mongodbr.MongodbrIns
 	for _, eachOpt := range opts {
 		eachOpt(insertOneOptions)
 	}
-	dbItem, err := s.FindById(oid, mongodbr.FindOneOptionsWithContextOptions(insertOneOptions.WithContextOptions))
+	dbItem, err := s.FindById(oid, func(mfoo *mongodbr.MongodbrFindOneOptions) {
+		mfoo.WithCtx = insertOneOptions.WithCtx
+	})
 	if err != nil {
 		return nil, err
 	}
