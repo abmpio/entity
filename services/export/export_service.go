@@ -120,7 +120,7 @@ func (s *EntityExportService[T]) GetExport(exportId string) (*EntityExport, erro
 }
 
 func (s *EntityExportService[T]) export(export *EntityExport) {
-	cursor := s.repository.FindByFilter(export.Filter).GetCursor()
+	cursor := s.repository.FindListResultByFilter(export.Filter).GetCursor()
 
 	//csv writer
 	csvWriter, csvFile, err := s.getCsvWriter(export)
@@ -285,7 +285,7 @@ func (s *EntityExportService[T]) mapColumns(export *EntityExport) (columns []tup
 	}
 
 	var data []bson.M
-	if err := s.repository.FindByFilter(export.Filter, mongodbr.MongodbrFindOptionWithLimit(10)).All(&data); err != nil {
+	if err := s.repository.FindListByFilter(export.Filter, &data, mongodbr.MongodbrFindOptionWithLimit(10)); err != nil {
 		return nil, err
 	}
 

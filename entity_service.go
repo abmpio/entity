@@ -42,12 +42,11 @@ func (s *EntityService[T]) GetRepository() mongodbr.IRepository {
 }
 
 func (s *EntityService[T]) FindAll(opts ...mongodbr.MongodbrFindOption) (list []*T, err error) {
-	res := s.repository.FindAll(opts...)
-	err = res.All(&list)
+	res, err := mongodbr.FindAllT[T](s.repository, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return list, nil
+	return res, nil
 }
 
 func (s *EntityService[T]) FindList(filter interface{}, opts ...mongodbr.MongodbrFindOption) (list []*T, err error) {
