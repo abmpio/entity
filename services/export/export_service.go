@@ -149,7 +149,7 @@ func (s *EntityExportService[T]) export(export *EntityExport) {
 		s.cache.Set(export.Id, export)
 		return
 	}
-	columnTitle := slicex.ToSliceV[tuple.T2[string, string], string](columns, func(item tuple.T2[string, string]) string {
+	columnTitle := slicex.ToSliceV(columns, func(item tuple.T2[string, string]) string {
 		return item.V2
 	})
 	err = csvWriter.Write(columnTitle)
@@ -200,7 +200,7 @@ func (s *EntityExportService[T]) export(export *EntityExport) {
 			return
 		}
 
-		columnNameList := slicex.ToSliceV[tuple.T2[string, string], string](columns, func(item tuple.T2[string, string]) string {
+		columnNameList := slicex.ToSliceV(columns, func(item tuple.T2[string, string]) string {
 			return item.V1
 		})
 		cells := s.getRowCells(columnNameList, entityItem, &export.ExportOptions)
@@ -285,7 +285,7 @@ func (s *EntityExportService[T]) mapColumns(export *EntityExport) (columns []tup
 	}
 
 	var data []bson.M
-	if err := s.repository.FindByFilter(export.Filter, mongodbr.FindOptionWithLimit(10)).All(&data); err != nil {
+	if err := s.repository.FindByFilter(export.Filter, mongodbr.MongodbrFindOptionWithLimit(10)).All(&data); err != nil {
 		return nil, err
 	}
 
