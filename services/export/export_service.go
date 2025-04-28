@@ -284,7 +284,7 @@ func (s *EntityExportService[T]) mapColumns(export *EntityExport) (columns []tup
 		return columns, nil
 	}
 
-	var data []bson.M
+	data := make([]bson.M, 0)
 	if err := s.repository.FindListByFilter(export.Filter, &data, mongodbr.MongodbrFindOptionWithLimit(10)); err != nil {
 		return nil, err
 	}
