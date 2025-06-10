@@ -22,6 +22,9 @@ type IEntityService[T mongodbr.IEntity] interface {
 	Delete(primitive.ObjectID, ...mongodbr.MongodbrDeleteOption) error
 	DeleteMany(interface{}, ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
 	DeleteManyByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
+
+	// update fields with mongodbr.BsonBuilder
+	UpdateFieldsWithBsonBuilder(id primitive.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 	// update fields
 	UpdateFields(id primitive.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 	// remove fields for one item
@@ -115,6 +118,12 @@ func (service *EntityService[T]) DeleteManyByIdList(idList []primitive.ObjectID,
 		"_id": bson.M{"$in": idList},
 	}
 	return service.DeleteMany(filter, opts...)
+}
+
+// update fields with mongodbr.BsonBuilder
+func (s *EntityService[T]) UpdateFieldsWithBsonBuilder(id primitive.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
+	value := bsonBuilder.ToValue()
+	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
 }
 
 // update fields value

@@ -10,7 +10,7 @@ require (
 	github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0
 	github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034
 	github.com/abmpio/libx v0.0.0-20250526021149-38a2934a3c70
-	github.com/abmpio/mongodbr v0.0.0-20250610083149-563d29f7414e
+	github.com/abmpio/mongodbr v0.0.0-20250610114058-b53cd64aacef
 	github.com/abmpio/webserver v0.0.0-20250505084631-bdad4b542e1c
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/satori/go.uuid v1.2.0
@@ -91,7 +91,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/crypto v0.39.0 // indirect
-	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
+	golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476 // indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sync v0.15.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
