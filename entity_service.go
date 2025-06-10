@@ -22,7 +22,10 @@ type IEntityService[T mongodbr.IEntity] interface {
 	Delete(primitive.ObjectID, ...mongodbr.MongodbrDeleteOption) error
 	DeleteMany(interface{}, ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
 	DeleteManyByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
+	// update fields
 	UpdateFields(id primitive.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
+	// remove fields for one item
+	RemoveFields(id primitive.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 }
 
 type EntityService[T mongodbr.IEntity] struct {
@@ -118,6 +121,13 @@ func (service *EntityService[T]) DeleteManyByIdList(idList []primitive.ObjectID,
 func (s *EntityService[T]) UpdateFields(id primitive.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
 	value := mongodbBuilder.NewBsonBuilder().NewOrUpdateSet(update).ToValue()
 	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
+}
+
+// remove fields for one item
+func (s *EntityService[T]) RemoveFields(id primitive.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
+	value := mongodbBuilder.UnsetBsonBuilder(fields).ToValue()
+	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
+
 }
 
 // #endregion
