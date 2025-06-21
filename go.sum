@@ -20,10 +20,10 @@ github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0 h1:rw6AhVZ67bcwwBE72H9V
 github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0/go.mod h1:sAPphYGvWOTBeHlIIfYZAiDzzJtvxD0N38YwfmNkxx8=
 github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034 h1:HrNBErxhA3P3+4d6zpvYDimcM/fyR+9FaqzueDb4Wbg=
 github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034/go.mod h1:FlAIvGgmFA4Y/tgOcvIAlD9oPTEzM10y8wufMo5pSyM=
-github.com/abmpio/libx v0.0.0-20250526021149-38a2934a3c70 h1:X06x6S+CbN2TpoPcA7uJaXyK4U4IkThDy5nToOfYio0=
-github.com/abmpio/libx v0.0.0-20250526021149-38a2934a3c70/go.mod h1:1FdlmnwDWa2mTehDyH2JgEozqZv2uTys6LM+PmYRCZg=
-github.com/abmpio/mongodbr v0.0.0-20250610114058-b53cd64aacef h1:9wXIOee54iaZJAeHwh2dnm1Fnp75JH4qlMyWTRo52Pc=
-github.com/abmpio/mongodbr v0.0.0-20250610114058-b53cd64aacef/go.mod h1:SHU/IsF3uCb5sOTO6XcU9w1RfJgegvdR3GFs5agG57M=
+github.com/abmpio/libx v0.0.0-20250612093214-dcfcf9469119 h1:IRJOvpaDgN6/Pb15425UISxWYmSjlal981Ii7+5L/5U=
+github.com/abmpio/libx v0.0.0-20250612093214-dcfcf9469119/go.mod h1:1FdlmnwDWa2mTehDyH2JgEozqZv2uTys6LM+PmYRCZg=
+github.com/abmpio/mongodbr v0.0.0-20250621155155-4fcf3f56f31f h1:lmjI3CkNKBADk7v3OAitOC3NH+d3FGD8wqnVgBUIqfI=
+github.com/abmpio/mongodbr v0.0.0-20250621155155-4fcf3f56f31f/go.mod h1:SHU/IsF3uCb5sOTO6XcU9w1RfJgegvdR3GFs5agG57M=
 github.com/abmpio/webserver v0.0.0-20250505084631-bdad4b542e1c h1:yyJhNgaxxxfiToZ13v2/+mZa9eyGP1VxN0axNNq75vQ=
 github.com/abmpio/webserver v0.0.0-20250505084631-bdad4b542e1c/go.mod h1:fuElTNM50ZaaV0twuY0XrmYKzeKyQGO1KpsDkzqeh84=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
@@ -357,8 +357,8 @@ golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPh
 golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
 golang.org/x/crypto v0.39.0 h1:SHs+kF4LP+f+p14esP5jAoDpHU8Gu/v9lFRK6IT5imM=
 golang.org/x/crypto v0.39.0/go.mod h1:L+Xg3Wf6HoL4Bn4238Z6ft6KfEpN0tJGo53AAPC632U=
-golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476 h1:bsqhLWFR6G6xiQcb+JoGqdKdRU6WzPWmK8E0jxTjzo4=
-golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476/go.mod h1:3//PLf8L/X+8b4vuAfHzxeRUl04Adcb341+IGKfnqS8=
+golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b h1:M2rDM6z3Fhozi9O7NWsxAkg/yqS/lQJ6PmkyIV3YP+o=
+golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b/go.mod h1:3//PLf8L/X+8b4vuAfHzxeRUl04Adcb341+IGKfnqS8=
 golang.org/x/mod v0.5.1/go.mod h1:5OXOZSfqPIIbmVBIIKWRFfZjPR0E5r58TLhUjH0a2Ro=
 golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4/go.mod h1:jJ57K6gSWd91VN4djpZkiMVwK6gcyfeH4XE8wZrZaV4=
 golang.org/x/mod v0.25.0 h1:n7a+ZbQKQA/Ysbyb0/6IbB1H/X41mKgbhfv7AfG/44w=
