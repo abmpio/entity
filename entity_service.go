@@ -19,7 +19,11 @@ type IEntityService[T mongodbr.IEntity] interface {
 	FindOne(filter interface{}, opts ...mongodbr.MongodbrFindOneOption) (*T, error)
 
 	Create(interface{}, ...mongodbr.MongodbrInsertOneOption) (*T, error)
+	// delete one by id
 	Delete(primitive.ObjectID, ...mongodbr.MongodbrDeleteOption) error
+	// delete one by filter
+	DeleteOne(filter interface{}, opts ...mongodbr.MongodbrDeleteOption) error
+	// delete many by filter
 	DeleteMany(interface{}, ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
 	DeleteManyByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
 
@@ -104,6 +108,16 @@ func (s *EntityService[T]) Delete(id primitive.ObjectID, opts ...mongodbr.Mongod
 	return nil
 }
 
+// delete one by filter
+func (s *EntityService[T]) DeleteOne(filter interface{}, opts ...mongodbr.MongodbrDeleteOption) error {
+	_, err := s.repository.DeleteOneByFilter(filter, opts...)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// delete many by filter
 func (s *EntityService[T]) DeleteMany(filter interface{}, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error) {
 	return s.repository.DeleteMany(filter, opts...)
 }
