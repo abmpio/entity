@@ -7,7 +7,7 @@ toolchain go1.24.2
 require (
 	github.com/ReneKroon/ttlcache v1.7.0
 	github.com/abmpio/abmp v0.0.0-20251111100814-b388b7309978
-	github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0
+	github.com/abmpio/app v0.0.0-20251117083545-747a0d94c71c
 	github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034
 	github.com/abmpio/libx v0.0.0-20251025150424-a9353a6e248f
 	github.com/abmpio/mongodbr v0.0.0-20251111101002-feaf6969d42f

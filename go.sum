@@ -16,8 +16,8 @@ github.com/Shopify/goreferrer v0.0.0-20240724165105-aceaa0259138 h1:gjbp60h8IZQb
 github.com/Shopify/goreferrer v0.0.0-20240724165105-aceaa0259138/go.mod h1:NYezi6wtnJtBm5btoprXc5SvAdqH0XTXWnUup0MptAI=
 github.com/abmpio/abmp v0.0.0-20251111100814-b388b7309978 h1:Iz11TAZdLv0EMdZG4Z0zstUe0R/xhqPyyRHZXwdnPSs=
 github.com/abmpio/abmp v0.0.0-20251111100814-b388b7309978/go.mod h1:X/dywIwBgOtyeLHfP7h29acbiLwnq0Rbw/i6QAtRGro=
-github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0 h1:rw6AhVZ67bcwwBE72H9VqpIxp5+XB1MpKr8BPLPpuOw=
-github.com/abmpio/app v0.0.0-20250405145210-604e829a8eb0/go.mod h1:sAPphYGvWOTBeHlIIfYZAiDzzJtvxD0N38YwfmNkxx8=
+github.com/abmpio/app v0.0.0-20251117083545-747a0d94c71c h1:7519gbiLCmKnrMI6x+OssvdyZsIhsIudOKe9ijUlSLw=
+github.com/abmpio/app v0.0.0-20251117083545-747a0d94c71c/go.mod h1:sAPphYGvWOTBeHlIIfYZAiDzzJtvxD0N38YwfmNkxx8=
 github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034 h1:HrNBErxhA3P3+4d6zpvYDimcM/fyR+9FaqzueDb4Wbg=
 github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034/go.mod h1:FlAIvGgmFA4Y/tgOcvIAlD9oPTEzM10y8wufMo5pSyM=
 github.com/abmpio/libx v0.0.0-20251025150424-a9353a6e248f h1:9z3+r1XWqtAHWWejqX8f2RSqpJSVenT4DWCQxE0v/1s=
