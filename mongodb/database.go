@@ -5,6 +5,7 @@ import (
 
 	"github.com/abmpio/mongodbr"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 var (
@@ -80,10 +81,14 @@ func (d *Database) GetRepository(modelInstance interface{}) mongodbr.IRepository
 	if ok {
 		return instance
 	}
-	return nil
+	instance = d.ensureCreateRepository(modelInstance, collectionName)
+	if instance != nil {
+		d._repositoryMapping[collectionName] = instance
+	}
+	return instance
 }
 
-func (d *Database) ensureCreateRepository(collectionName string, opts ...mongodbr.RepositoryOption) mongodbr.IRepository {
+func (d *Database) ensureCreateRepository(modelInstance interface{}, collectionName string, opts ...mongodbr.RepositoryOption) mongodbr.IRepository {
 	if len(d._entityRepositoryOptionMap) > 0 {
 		registedOpts, ok := d._entityRepositoryOptionMap[collectionName]
 		if ok && len(registedOpts) > 0 {
@@ -91,7 +96,10 @@ func (d *Database) ensureCreateRepository(collectionName string, opts ...mongodb
 		}
 	}
 	repository, err := mongodbr.NewRepositoryBase(func() *mongo.Collection {
-		return d._db.Collection(collectionName)
+		// apply registed collection options
+		collectionOptions := options.Collection()
+		applyCollectionOptions(modelInstance, collectionOptions)
+		return d._db.Collection(collectionName, collectionOptions)
 	}, opts...)
 	if err != nil {
 		panic(err)
