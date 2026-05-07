@@ -10,8 +10,8 @@ import (
 	"github.com/abmpio/configurationx/options/mongodb"
 	"github.com/abmpio/mongodbr"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 func initMongodbConfigurator(cliApp cli.CliApplication) {

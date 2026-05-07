@@ -3,9 +3,8 @@ package entity
 import (
 	"github.com/abmpio/mongodbr"
 	mongodbBuilder "github.com/abmpio/mongodbr/builder"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
 type IEntityService[T mongodbr.IEntity] interface {
@@ -13,26 +12,26 @@ type IEntityService[T mongodbr.IEntity] interface {
 
 	FindAll(opts ...mongodbr.MongodbrFindOption) ([]*T, error)
 	FindList(filter interface{}, opts ...mongodbr.MongodbrFindOption) (list []*T, err error)
-	FindListByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrFindOption) (list []*T, err error)
+	FindListByIdList(idList []bson.ObjectID, opts ...mongodbr.MongodbrFindOption) (list []*T, err error)
 	Count(filter interface{}, opts ...mongodbr.MongodbrCountOption) (count int64, err error)
-	FindById(id primitive.ObjectID, opts ...mongodbr.MongodbrFindOneOption) (*T, error)
+	FindById(id bson.ObjectID, opts ...mongodbr.MongodbrFindOneOption) (*T, error)
 	FindOne(filter interface{}, opts ...mongodbr.MongodbrFindOneOption) (*T, error)
 
 	Create(interface{}, ...mongodbr.MongodbrInsertOneOption) (*T, error)
 	// delete one by id
-	Delete(primitive.ObjectID, ...mongodbr.MongodbrDeleteOption) error
+	Delete(bson.ObjectID, ...mongodbr.MongodbrDeleteOption) error
 	// delete one by filter
 	DeleteOne(filter interface{}, opts ...mongodbr.MongodbrDeleteOption) error
 	// delete many by filter
 	DeleteMany(interface{}, ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
-	DeleteManyByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
+	DeleteManyByIdList(idList []bson.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error)
 
 	// update fields with mongodbr.BsonBuilder
-	UpdateFieldsWithBsonBuilder(id primitive.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
+	UpdateFieldsWithBsonBuilder(id bson.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 	// update fields
-	UpdateFields(id primitive.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
+	UpdateFields(id bson.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 	// remove fields for one item
-	RemoveFields(id primitive.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
+	RemoveFields(id bson.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error
 }
 
 type EntityService[T mongodbr.IEntity] struct {
@@ -63,7 +62,7 @@ func (s *EntityService[T]) FindList(filter interface{}, opts ...mongodbr.Mongodb
 	return mongodbr.FindTByFilter[T](s.repository, filter, opts...)
 }
 
-func (s *EntityService[T]) FindListByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrFindOption) (list []*T, err error) {
+func (s *EntityService[T]) FindListByIdList(idList []bson.ObjectID, opts ...mongodbr.MongodbrFindOption) (list []*T, err error) {
 	return mongodbr.FindTListByObjectIdList[T](s.repository, idList, opts...)
 }
 
@@ -71,7 +70,7 @@ func (s *EntityService[T]) Count(filter interface{}, opts ...mongodbr.MongodbrCo
 	return s.repository.CountByFilter(filter, opts...)
 }
 
-func (s *EntityService[T]) FindById(id primitive.ObjectID, opts ...mongodbr.MongodbrFindOneOption) (*T, error) {
+func (s *EntityService[T]) FindById(id bson.ObjectID, opts ...mongodbr.MongodbrFindOneOption) (*T, error) {
 	return mongodbr.FindTByObjectId[T](s.repository, id, opts...)
 }
 
@@ -100,7 +99,7 @@ func (s *EntityService[T]) Create(item interface{}, opts ...mongodbr.MongodbrIns
 	return dbItem, nil
 }
 
-func (s *EntityService[T]) Delete(id primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) error {
+func (s *EntityService[T]) Delete(id bson.ObjectID, opts ...mongodbr.MongodbrDeleteOption) error {
 	_, err := s.repository.DeleteOne(id, opts...)
 	if err != nil {
 		return err
@@ -122,7 +121,7 @@ func (s *EntityService[T]) DeleteMany(filter interface{}, opts ...mongodbr.Mongo
 	return s.repository.DeleteMany(filter, opts...)
 }
 
-func (service *EntityService[T]) DeleteManyByIdList(idList []primitive.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error) {
+func (service *EntityService[T]) DeleteManyByIdList(idList []bson.ObjectID, opts ...mongodbr.MongodbrDeleteOption) (*mongo.DeleteResult, error) {
 	if len(idList) <= 0 {
 		return &mongo.DeleteResult{
 			DeletedCount: 0,
@@ -135,19 +134,19 @@ func (service *EntityService[T]) DeleteManyByIdList(idList []primitive.ObjectID,
 }
 
 // update fields with mongodbr.BsonBuilder
-func (s *EntityService[T]) UpdateFieldsWithBsonBuilder(id primitive.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
+func (s *EntityService[T]) UpdateFieldsWithBsonBuilder(id bson.ObjectID, bsonBuilder *mongodbBuilder.BsonBuilder, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
 	value := bsonBuilder.ToValue()
 	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
 }
 
 // update fields value
-func (s *EntityService[T]) UpdateFields(id primitive.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
+func (s *EntityService[T]) UpdateFields(id bson.ObjectID, update map[string]interface{}, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
 	value := mongodbBuilder.NewBsonBuilder().NewOrUpdateSet(update).ToValue()
 	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
 }
 
 // remove fields for one item
-func (s *EntityService[T]) RemoveFields(id primitive.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
+func (s *EntityService[T]) RemoveFields(id bson.ObjectID, fields []string, opts ...mongodbr.MongodbrFindOneAndUpdateOption) error {
 	value := mongodbBuilder.UnsetBsonBuilder(fields).ToValue()
 	return s.repository.FindOneAndUpdateWithId(id, value, opts...)
 

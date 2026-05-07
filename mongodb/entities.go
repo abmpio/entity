@@ -6,8 +6,8 @@ import (
 	"github.com/abmpio/libx/reflector"
 	"github.com/abmpio/libx/str"
 	"github.com/abmpio/mongodbr"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 var (
@@ -92,7 +92,8 @@ func createEntityRepositoryOption[T mongodbr.IEntity](opts ...mongodbr.Repositor
 			return new(T)
 		}))
 		opts = append(opts, mongodbr.WithDefaultSort(func(fo *options.FindOptions) *options.FindOptions {
-			return fo.SetSort(bson.D{{Key: "_id", Value: -1}})
+			fo.Sort = bson.D{{Key: "_id", Value: -1}}
+			return fo
 		}))
 	}
 	return opts

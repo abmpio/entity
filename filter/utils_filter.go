@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strings"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type FieldSpecification struct {
@@ -79,7 +79,7 @@ func GetFilter(getKeyFn func(key string) string, opts ...GetFilterQueryOption) (
 				continue
 			}
 			// mongodb object id
-			id, err := primitive.ObjectIDFromHex(item)
+			id, err := bson.ObjectIDFromHex(item)
 			if err == nil {
 				conditions[i].Value = id
 			} else {

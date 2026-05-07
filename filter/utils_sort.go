@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/abmpio/entity"
-	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 // GetSorts Get entity.Sort

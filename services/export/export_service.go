@@ -18,9 +18,8 @@ import (
 	"github.com/abmpio/libx/slicex"
 	"github.com/abmpio/mongodbr"
 	uuid "github.com/satori/go.uuid"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
 type ExportOptions struct {
@@ -339,9 +338,9 @@ func (s *EntityExportService[T]) getRowCells(columns []string, entityItem *T, op
 				cells = append(cells, strconv.FormatFloat(vValue, 'f', -1, 64))
 			case bool:
 				cells = append(cells, strconv.FormatBool(vValue))
-			case primitive.ObjectID:
+			case bson.ObjectID:
 				cells = append(cells, vValue.Hex())
-			case primitive.DateTime:
+			case bson.DateTime:
 				cells = append(cells, vValue.Time().Format("2006-01-02 15:04:05"))
 			default:
 				cells = append(cells, fmt.Sprintf("%v", vValue))

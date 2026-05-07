@@ -4,13 +4,29 @@ import (
 	"fmt"
 
 	"github.com/abmpio/mongodbr"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 var (
 	_registedDatabase map[string]*Database = make(map[string]*Database)
 )
+
+type collectionOptionsLister struct {
+	value *options.CollectionOptions
+}
+
+func (o collectionOptionsLister) List() []func(*options.CollectionOptions) error {
+	if o.value == nil {
+		return nil
+	}
+	return []func(*options.CollectionOptions) error{
+		func(target *options.CollectionOptions) error {
+			*target = *o.value
+			return nil
+		},
+	}
+}
 
 type Database struct {
 	MongoClientKey string
@@ -97,9 +113,9 @@ func (d *Database) ensureCreateRepository(modelInstance interface{}, collectionN
 	}
 	repository, err := mongodbr.NewRepositoryBase(func() *mongo.Collection {
 		// apply registed collection options
-		collectionOptions := options.Collection()
+		collectionOptions := &options.CollectionOptions{}
 		applyCollectionOptions(modelInstance, collectionOptions)
-		return d._db.Collection(collectionName, collectionOptions)
+		return d._db.Collection(collectionName, collectionOptionsLister{value: collectionOptions})
 	}, opts...)
 	if err != nil {
 		panic(err)
