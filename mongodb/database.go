@@ -16,7 +16,9 @@ type collectionOptionsLister struct {
 	value *options.CollectionOptions
 }
 
-func (o collectionOptionsLister) List() []func(*options.CollectionOptions) error {
+var _ options.Lister[options.CollectionOptions] = (*collectionOptionsLister)(nil)
+
+func (o *collectionOptionsLister) List() []func(*options.CollectionOptions) error {
 	if o.value == nil {
 		return nil
 	}
@@ -115,7 +117,7 @@ func (d *Database) ensureCreateRepository(modelInstance interface{}, collectionN
 		// apply registed collection options
 		collectionOptions := &options.CollectionOptions{}
 		applyCollectionOptions(modelInstance, collectionOptions)
-		return d._db.Collection(collectionName, collectionOptionsLister{value: collectionOptions})
+		return d._db.Collection(collectionName, &collectionOptionsLister{value: collectionOptions})
 	}, opts...)
 	if err != nil {
 		panic(err)
