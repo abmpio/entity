@@ -10,7 +10,7 @@ require (
 	github.com/abmpio/app v0.0.0-20251117083545-747a0d94c71c
 	github.com/abmpio/configurationx v0.0.0-20250514030648-55ccd037d034
 	github.com/abmpio/libx v0.0.0-20251025150424-a9353a6e248f
-	github.com/abmpio/mongodbr v0.0.0-20260508063009-85ae6df2eeef
+	github.com/abmpio/mongodbr v0.0.0-20260508161118-64c0a0c6aacf
 	github.com/abmpio/webserver v0.0.0-20250505084631-bdad4b542e1c
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/satori/go.uuid v1.2.0
